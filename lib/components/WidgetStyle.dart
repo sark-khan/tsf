@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 
 import '../utils/AppConstants.dart';
 
-class BoxShadow{
-  BoxShadow customDecoration(context){
+class BoxShadows{
+  BoxDecoration customDecoration(color,spreadRadius,blurRadius,offset){
     return
-          BoxShadow(
-            color: AppColors().textFieldShadow,
-            // Shadow color
-            spreadRadius: 2,
-            // Spread of the shadow
-            blurRadius: 5,
-            // Blur radius of the shadow
-            offset: const Offset(
-                0, 2),
-          )
+      BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color:color,
+              // Shadow color
+              spreadRadius: spreadRadius,
+              // Spread of the shadow
+              blurRadius: blurRadius,
+              // Blur radius of the shadow
+              offset: offset
+            )
+          ]
+      );
   }
   // return
 }
