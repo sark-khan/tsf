@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="tsf_local"
+        android:label="tsf_local_local"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,6 +1,6 @@
 {
-    "name": "tsf_local",
-    "short_name": "tsf_local",
+    "name": "tsf_local_local",
+    "short_name": "tsf_local_local",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

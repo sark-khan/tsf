@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:tsf_local/components/WidgetStyle.dart';
-import 'package:tsf_local/utils/AppConstants.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
+import 'package:tsf/components/WidgetStyle.dart';
+import 'package:tsf/components/background.dart';
+import 'package:tsf/components/customLoader.dart';
+import 'package:tsf/utils/AppConstants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+import '../utils/commonFunctions.dart';
 
+class Login extends StatefulWidget {
   @override
   State createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/Login.png"),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+          Background(context),
           Container(
               padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * 0.20),
@@ -50,6 +49,7 @@ class _LoginState extends State<Login> {
                 decoration: BoxShadows().customDecoration(
                     AppColors().textFieldShadow, 2, 5, const Offset(0, 3)),
                 child: TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     fillColor: AppColors().textFillColor,
                     filled: true,
@@ -66,18 +66,19 @@ class _LoginState extends State<Login> {
               const SizedBox(height: 30),
               Container(
                 decoration: BoxShadows().customDecoration(
-                AppColors().textFieldShadow, 2, 5, const Offset(0, 3)),
+                    AppColors().textFieldShadow, 2, 5.0, const Offset(0, 3)),
                 child: TextField(
+                  controller: passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                     fillColor: AppColors().textFillColor,
                     filled: true,
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: const Icon(Icons.password_rounded),
+                    prefixIcon: const Padding(
+                      padding: EdgeInsets.all(15.0),
+                      child: Icon(Icons.password_rounded),
                     ),
                     suffixIcon: Padding(
-                      padding: const EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: IconButton(
                           onPressed: () {},
                           icon: const Icon(Icons.visibility_off)),
@@ -92,23 +93,15 @@ class _LoginState extends State<Login> {
                   alignment: Alignment.centerRight,
                   child: Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Text(
-                      TextConstants().FORGOTPASSWORD,
-                      style: TextStyle(color: AppColors().white),
+                    child: InkWell(
+                      onTap: () =>
+                          {Navigator.of(context).pushNamed("/forgot-password")},
+                      child: Text(
+                        TextConstants().FORGOTPASSWORD,
+                        style: TextStyle(color: AppColors().white),
+                      ),
                     ),
                   )),
-              // Align(
-              //     alignment: Alignment.center,
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(20),
-              //       child: ElevatedButton.icon(
-              //           onPressed: () {},
-              //           icon: const Icon(
-              //             Icons.login,
-              //             size: 30.0,
-              //           ),
-              //           label: Text(TextConstants().LOGIN)),
-              //     ))
               Container(
                 padding: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.10,
@@ -116,16 +109,26 @@ class _LoginState extends State<Login> {
                     right: MediaQuery.of(context).size.width * 0.1),
                 child: Container(
                   width: double.infinity,
-
                   decoration: BoxShadows().customDecoration(
                       AppColors().textFieldShadow, 2, 5, const Offset(0, 2)),
-
                   child: MaterialButton(
                       // elevation: 10,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)),
                       color: AppColors().gold,
-                      onPressed: () {},
+                      onPressed: hasConnectionWrapper(
+                        () async {
+                          ReturnObj returnObj = CommonFunctions().validateLogin(
+                              emailController.text, passwordController.text);
+
+                          if (returnObj.status) {
+                            Fluttertoast.showToast(msg: "Login Success");
+                            Navigator.of(context).pushNamed("/forgot-password");
+                          } else {
+                            Fluttertoast.showToast(msg: "Login Failure");
+                          }
+                        },
+                      ),
                       child: FittedBox(
                         fit: BoxFit.fitHeight,
                         child: Padding(

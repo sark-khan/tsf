@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tsf_local/components/WidgetStyle.dart';
-import 'package:tsf_local/utils/AppConstants.dart';
+import 'package:tsf/components/WidgetStyle.dart';
+import 'package:tsf/components/background.dart';
+import 'package:tsf/utils/AppConstants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -18,16 +19,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         // appBar: AppBar(automaticallyImplyLeading: true),
         body: Stack(
           children: [
-            Container(
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                image: AssetImage("assets/Login.png"),
-                fit: BoxFit.cover,
-              )),
-            ),
+            Background(context),
             SingleChildScrollView(
-              child: Container(
-                  child: Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
@@ -60,7 +54,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           right: MediaQuery.of(context).size.width * 0.1),
                       child: Container(
                         decoration: BoxShadows().customDecoration(
-                            AppColors().textFieldShadow, 2, 5, const Offset(0, 3)),
+                            AppColors().textFieldShadow,
+                            2,
+                            5,
+                            const Offset(0, 3)),
                         child: TextField(
                           decoration: InputDecoration(
                             fillColor: AppColors().textFillColor,
@@ -80,36 +77,36 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         top: MediaQuery.of(context).size.height * 0.20,
                         left: MediaQuery.of(context).size.width * 0.1,
                         right: MediaQuery.of(context).size.width * 0.1),
-
-
                     child: Container(
                       width: double.infinity,
                       decoration: BoxShadows().customDecoration(
-                          AppColors().textFieldShadow, 2, 5, const Offset(0, 2)),
-
-                        child: MaterialButton(
-                            // elevation: 10,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                            color: AppColors().gold,
-                            onPressed: () {},
-                            child: FittedBox(
-                              fit: BoxFit.fitHeight,
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Text(TextConstants().SUBMIT,
-                                    style: GoogleFonts.montserrat(
-                                        textStyle:
-                                            TextStyle(color: AppColors().white),fontWeight: FontWeight.bold)),
-                              ),
-                            )),
-
+                          AppColors().textFieldShadow,
+                          2,
+                          5,
+                          const Offset(0, 2)),
+                      child: MaterialButton(
+                          // elevation: 10,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          color: AppColors().gold,
+                          onPressed: () {},
+                          child: FittedBox(
+                            fit: BoxFit.fitHeight,
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Text(TextConstants().SUBMIT,
+                                  style: GoogleFonts.montserrat(
+                                      textStyle:
+                                          TextStyle(color: AppColors().white),
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                          )),
                     ),
                   )
                 ],
-              )),
+              ),
             )
           ],
-        )
-        );
+        ));
   }
 }

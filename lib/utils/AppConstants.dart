@@ -4,7 +4,10 @@ class AppColors {
   Color textFillColor = Colors.grey.shade100;
   Color textFieldShadow = Colors.black.withOpacity(0.3);
   Color white = Colors.white;
-  Color gold= Color(0xFFF69e22);
+  Color gold = const Color(0xFFF69e22);
+  Color grey=const Color(0xFF707070);
+  Color lightGrey= const Color(0xFFacacac);
+  Color green= const Color(0xFF7db644);
 }
 
 class TextConstants {
@@ -12,6 +15,6 @@ class TextConstants {
   String PASSWORD = "Password";
   String EMAIL = "Email";
   String FORGOTPASSWORD = "Forgot Password..?";
-  String FORGOTPASSWORDSCREENTEXT= "Forgot Password";
-  String SUBMIT="Submit";
+  String FORGOTPASSWORDSCREENTEXT = "Forgot Password";
+  String SUBMIT = "Submit";
 }
